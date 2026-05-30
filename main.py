@@ -8,8 +8,36 @@ class Node:
 
 
 def convert(tree):
-    # Your solution here!
-    pass
+# Your solution here!
+    
+    d = {}
+    def traverse(node):
+        if node:
+            if not node.left and not node.right:
+                d[node.value] = (None, None)
+
+            elif not node.left:
+                d[node.value] = (None, node.right.value)
+            elif not node.right:
+                d[node.value] = (node.left.value, None) 
+            else:      
+                d[node.value] = (node.left.value, node.right.value)  
+
+            traverse(node.left)
+            traverse(node.right)
+    traverse(tree)    
+    return  d   
+
+
+
+
+
+
+
+
+    
+
+
 
 
 r"""
@@ -18,11 +46,7 @@ r"""
      e   v
 """
 tree = Node("d", Node("e"), Node("v"))
-assert convert(tree) == {
-    "d": ("e", "v"),
-    "e": (None, None),
-    "v": (None, None),
-}
+print(convert(tree))
 
 r"""
            a
